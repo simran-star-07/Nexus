@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-scale: 1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: calc(1rem * var(--font-scale));
+    background: #0a0e1a;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .shimmer-bg {
+    background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+  .gradient-saffron {
+    background: linear-gradient(135deg, #FF9933, #FF6B35);
+  }
+  .gradient-navy {
+    background: linear-gradient(135deg, #003366, #001a33);
+  }
+  .gradient-gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+  }
+  .text-gradient-saffron {
+    background: linear-gradient(135deg, #FF9933, #FF6B35);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+::-webkit-scrollbar-thumb { background: #FF9933; border-radius: 2px; }
+
+/* Vibration tap zone */
+.tap-zone {
+  position: relative;
+  overflow: hidden;
+  border: 3px dashed rgba(255, 153, 51, 0.5);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.tap-zone:active, .tap-zone.tapping {
+  background: rgba(255, 153, 51, 0.15);
+  border-color: #FF9933;
+  transform: scale(0.98);
+}
+
+/* PIN pad buttons */
+.pin-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.pin-btn:hover { background: rgba(255, 153, 51, 0.2); transform: scale(1.05); }
+.pin-btn:active { transform: scale(0.95); }
+
+/* High contrast mode */
+.high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+.high-contrast .glass { background: rgba(255,255,255,0.1) !important; }
+
+/* Animations */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes coin-fall {
+  0% { transform: translateY(-30px) scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(150px) scale(0.3) rotate(720deg); opacity: 0; }
+}
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(4); opacity: 0; }
+}
+@keyframes slide-up { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes bounce-in { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.1); } 80% { transform: scale(0.9); } 100% { transform: scale(1); opacity: 1; } }
